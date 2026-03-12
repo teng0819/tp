@@ -6,13 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonByName;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,7 +29,8 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(0);
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName().fullName);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
+        String expectedMessage = String.format(
+                DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -46,7 +44,8 @@ public class DeleteCommandTest {
         String invalidName = "Nonexistent Employee";
         DeleteCommand deleteCommand = new DeleteCommand(invalidName);
 
-        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_EMPLOYEE_NOT_FOUND, invalidName));
+        assertCommandFailure(deleteCommand, model,
+                String.format(DeleteCommand.MESSAGE_EMPLOYEE_NOT_FOUND, invalidName));
     }
 
     @Test
@@ -56,7 +55,8 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName().fullName);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
+        String expectedMessage = String.format(
+                DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(personToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -73,7 +73,8 @@ public class DeleteCommandTest {
         String invalidName = "Nonexistent Employee";
         DeleteCommand deleteCommand = new DeleteCommand(invalidName);
 
-        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_EMPLOYEE_NOT_FOUND, invalidName));
+        assertCommandFailure(deleteCommand, model,
+                String.format(DeleteCommand.MESSAGE_EMPLOYEE_NOT_FOUND, invalidName));
     }
 
     @Test
@@ -81,7 +82,8 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(0);
         DeleteCommand deleteCommand = new DeleteCommand(1);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
+        String expectedMessage = String.format(
+                DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
