@@ -51,10 +51,10 @@ public class EmployeeCard extends UiPart<Region> {
         this.person = employee;
         id.setText(displayedIndex + ". ");
         name.setText(employee.getName().fullName);
-        phone.setText(employee.getPhone().value);
-        position.setText(employee.getPosition().value);
-        department.setText(employee.getDepartment().value);
-        email.setText(employee.getEmail().value);
+        phone.setText("📞  " + employee.getPhone().value);
+        position.setText("💼  " + employee.getPosition().value);
+        department.setText("🏢  " + employee.getDepartment().value);
+        email.setText("📧  " + employee.getEmail().value);
         employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

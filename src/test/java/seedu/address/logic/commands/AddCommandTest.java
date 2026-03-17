@@ -149,6 +149,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Employee getEmployeeWithSamePhone(Employee employee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Employee getEmployeeWithSameEmail(Employee employee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Employee> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -175,6 +185,16 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public Employee getEmployeeWithSamePhone(Employee employee) {
+            return this.person.getPhone().equals(employee.getPhone()) ? this.person : null;
+        }
+
+        @Override
+        public Employee getEmployeeWithSameEmail(Employee employee) {
+            return this.person.getEmail().equals(employee.getEmail()) ? this.person : null;
+        }
     }
 
     /**
@@ -198,6 +218,20 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public Employee getEmployeeWithSamePhone(Employee employee) {
+            return personsAdded.stream()
+                    .filter(e -> e.getPhone().equals(employee.getPhone()))
+                    .findFirst().orElse(null);
+        }
+
+        @Override
+        public Employee getEmployeeWithSameEmail(Employee employee) {
+            return personsAdded.stream()
+                    .filter(e -> e.getEmail().equals(employee.getEmail()))
+                    .findFirst().orElse(null);
         }
     }
 
