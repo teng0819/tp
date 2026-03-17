@@ -2,27 +2,27 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.employee.predicate_checker.*;
+import seedu.address.model.employee.Employee;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Shows and filters employees based on given predicates.
  */
 public class ShowCommand extends Command {
 
     public static final String COMMAND_WORD = "show";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows employees filtered by fields.\n"
+            + "Parameters: /n NAME /d DEPARTMENT /p POSITION /e EMAIL /ph PHONE\n"
+            + "Example: " + COMMAND_WORD + " /n alex /d hr";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Employee> predicate;
 
-    public ShowCommand(NameContainsKeywordsPredicate predicate) {
+    public ShowCommand(Predicate<Employee> predicate) {
         this.predicate = predicate;
     }
 
@@ -30,23 +30,17 @@ public class ShowCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        model.getFilteredPersonList().size()));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ShowCommand)) {
-            return false;
-        }
-
-        ShowCommand otherShowCommand = (ShowCommand) other;
-        return predicate.equals(otherShowCommand.predicate);
+        return other == this
+                || (other instanceof ShowCommand
+                && predicate.equals(((ShowCommand) other).predicate));
     }
 
     @Override
