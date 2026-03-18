@@ -109,6 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param index zero-based index
      */
     public void markTask(int index) {
+        requireNonNull(tasks);
         tasks.markTask(index);
     }
 

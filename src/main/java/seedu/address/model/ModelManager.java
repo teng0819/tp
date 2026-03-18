@@ -168,6 +168,7 @@ public class ModelManager implements Model {
 
     @Override
     public void markTask(int index) {
+        requireNonNull(addressBook);
         addressBook.markTask(index);
     }
 }
