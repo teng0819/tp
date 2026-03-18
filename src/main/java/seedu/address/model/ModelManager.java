@@ -161,4 +161,13 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public void removeCompletedTasks() {
+        addressBook.removeCompletedTasks();
+    }
+
+    @Override
+    public void markTask(int index) {
+        addressBook.markTask(index);
+    }
 }

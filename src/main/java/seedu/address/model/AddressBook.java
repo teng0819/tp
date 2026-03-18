@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.UniquePersonList;
+import seedu.address.model.person.TaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -16,7 +17,7 @@ import seedu.address.model.employee.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final TaskList tasks;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -26,7 +27,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tasks = new TaskList();
     }
+
 
     public AddressBook() {}
 
@@ -92,6 +95,21 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Employee key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes all completed tasks.
+     */
+    public void removeCompletedTasks() {
+        tasks.removeCompletedTasks();
+    }
+
+    /**
+     * Marks a task as completed.
+     * @param index zero-based index
+     */
+    public void markTask(int index) {
+        tasks.markTask(index);
     }
 
     //// util methods

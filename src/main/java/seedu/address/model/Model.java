@@ -94,4 +94,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Employee> predicate);
+
+    /**
+     * Removes all completed tasks.
+     */
+    void removeCompletedTasks();
+
+    /**
+     * Marks a task as completed.
+     */
+    void markTask(int index);
 }
