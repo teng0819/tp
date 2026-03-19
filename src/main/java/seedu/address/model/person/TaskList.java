@@ -17,7 +17,7 @@ public class TaskList {
      *
      * @param task The task to be added. Must not be null.
      */
-    public void addTask(Task task) {
+    public void addTaskOverall(Task task) {
         requireNonNull(task);
         internalList.add(task);
     }

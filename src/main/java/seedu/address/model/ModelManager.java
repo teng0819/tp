@@ -178,9 +178,9 @@ public class ModelManager implements Model {
         addressBook.markTask(index);
     }
 
-    @Override
-    public void addTask(Task task) {
+    public void addTaskOverall(Task task) {
         addressBook.addTask(task);
     }
+
 
 }

@@ -32,7 +32,7 @@ class TaskListStorageTest {
     }
 
     @Test
-    void addTask_addsTaskSuccessfully() {
+    void addTask_addsTaskOverallSuccessfully() {
         Task newTask = new Task("Task 3", "2024-08-01");
         taskListStorage.addTask(newTask);
 

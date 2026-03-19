@@ -119,7 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a task to the task list.
      */
     public void addTask(Task task) {
-        tasks.addTask(task);
+        tasks.addTaskOverall(task);
     }
 
 

@@ -108,9 +108,5 @@ public interface Model {
      */
     void markTask(int index);
 
-    /**
-     * Adds a task to the task list.
-     * @param task
-     */
-    void addTask(Task task);
+
 }

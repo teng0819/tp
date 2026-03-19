@@ -15,8 +15,8 @@ public class TaskListTest {
 
         t2.markAsCompleted();
 
-        taskList.addTask(t1);
-        taskList.addTask(t2);
+        taskList.addTaskOverall(t1);
+        taskList.addTaskOverall(t2);
 
         taskList.removeCompletedTasks();
         assertTrue(true);
