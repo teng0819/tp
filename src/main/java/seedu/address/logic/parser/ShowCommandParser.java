@@ -100,7 +100,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     }
 
     /**
-     * Extracts value after a prefix (e.g. n/, d/) until next space or end.
+     * Extracts value after a prefix (e.g. n/, d/, e/) until next space or end.
      */
     private String extract(String input, String prefix) {
         int start = input.indexOf(prefix);
