@@ -108,8 +108,11 @@ public class PersonBuilder {
         return this;
     }
 
+
+
+
     public Employee build() {
-        return new Employee(name, phone, email, department, position, tags);
+        return new Employee(name, phone, email, department, position, tags, taskListStorage);
     }
 
     public PersonBuilder withTaskListStorage(TaskListStorage taskListStorage) {

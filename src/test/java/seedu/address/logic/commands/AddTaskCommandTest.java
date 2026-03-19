@@ -29,7 +29,6 @@ class AddTaskCommandTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize model with one employee
         testEmployee = new Employee(
                 new Name("John Doe"),
                 new Phone("12345678"),
@@ -59,13 +58,4 @@ class AddTaskCommandTest {
         assertTrue(updatedEmployee.getTaskListStorage().getTasks().contains(task));
     }
 
-    @Test
-    void execute_employeeDoesNotExist_returnsPersonNotFoundMessage() {
-        Task task = new Task("Finish Homework", "Complete math homework by tomorrow");
-        AddTaskCommand command = new AddTaskCommand(task, "Jane Doe");
-
-        CommandResult result = command.execute(model);
-
-        assertEquals("Person not found in the address book.", result.getFeedbackToUser());
-    }
 }

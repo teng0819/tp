@@ -48,5 +48,20 @@ public class Task {
         return taskName + ": " + taskDescription;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return taskName.equals(otherTask.taskName)
+                && taskDescription.equals(otherTask.taskDescription);
+    }
+
 
 }

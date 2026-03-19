@@ -51,6 +51,21 @@ public class AddTaskCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddTaskCommand)) {
+            return false;
+        }
+
+        AddTaskCommand otherCommand = (AddTaskCommand) other;
+        return task.equals(otherCommand.task)
+                && personName.equals(otherCommand.personName);
+    }
+
     public Employee getPerson(String personName, Model model) {
         for (Employee p : model.getAddressBook().getPersonList()) {
             if (p.getName().toString().equals(personName)) {
