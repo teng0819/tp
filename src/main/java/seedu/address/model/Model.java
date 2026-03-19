@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
 
 /**
  * The API of the Model component.
@@ -96,6 +96,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Employee> predicate);
 
+    void addTaskToPerson(Employee person, Task task);
+
     /**
      * Removes all completed tasks.
      */
@@ -106,9 +108,5 @@ public interface Model {
      */
     void markTask(int index);
 
-    /**
-     * Adds a task to the task list.
-     * @param task
-     */
-    void addTask(Task task);
+
 }

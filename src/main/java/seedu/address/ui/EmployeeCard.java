@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Task;
 
 /**
  * An UI component that displays information of a {@code Employee}.
@@ -42,6 +44,10 @@ public class EmployeeCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label tasks;
+
+
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
@@ -59,6 +65,11 @@ public class EmployeeCard extends UiPart<Region> {
         employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        tasks.setWrapText(true);
+        String taskText = person.getTaskListStorage().getTasks().stream()
+                .map(Task::toString)
+                .collect(Collectors.joining("\n"));
+        tasks.setText(taskText);
     }
 
     static String formatPhone(String phone) {

@@ -12,5 +12,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_POSITION = new Prefix("pos/");
     public static final Prefix PREFIX_DEPARTMENT = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_TASK_NAME = new Prefix("task/");
+    public static final Prefix PREFIX_TASK_DESCRIPTION = new Prefix("desc/");
 
 }

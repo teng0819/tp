@@ -1,9 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.model.employee;
 
 /**
  * A class to represent a Task.
  */
 public class Task {
+    public static final String MESSAGE_CONSTRAINTS_TASK_NAME = "Enter a valid task name.";
+    public static final String MESSAGE_CONSTRAINTS_TASK_DESCRIPTION = "Enter a valid task description.";
     private String taskName;
     private String taskDescription;
     private boolean isCompleted;
@@ -17,6 +19,14 @@ public class Task {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.isCompleted = false;
+    }
+
+    public static boolean isValidTaskName(String taskName) {
+        return taskName != null && !taskName.trim().isEmpty();
+    }
+
+    public static boolean isValidTaskDescription(String taskDescription) {
+        return taskDescription != null && !taskDescription.trim().isEmpty();
     }
 
     /**
@@ -62,5 +72,21 @@ public class Task {
     public String toString() {
         return taskName + ": " + taskDescription;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return taskName.equals(otherTask.taskName)
+                && taskDescription.equals(otherTask.taskDescription);
+    }
+
 
 }

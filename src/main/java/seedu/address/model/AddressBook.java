@@ -7,9 +7,10 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Task;
 import seedu.address.model.employee.UniquePersonList;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.TaskList;
+import seedu.address.storage.TaskList;
+
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final TaskList tasks;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -32,7 +34,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -107,6 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Marks a task as completed.
+     *
      * @param index zero-based index
      */
     public void markTask(int index) {
@@ -118,11 +122,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a task to the task list.
      */
     public void addTask(Task task) {
-        tasks.addTask(task);
+        tasks.addTaskOverall(task);
     }
 
 
-    //// util methods
+    /// / util methods
 
     @Override
     public String toString() {
@@ -154,5 +158,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    /**
+     * Adds a task to the specified person.
+     *
+     * @param target The person to add the task to.
+     * @param task   The task to be added.
+     */
+    public void addTaskToPerson(Employee target, Task task) {
+        requireNonNull(task);
+        persons.addTaskToPerson(target, task);
     }
 }

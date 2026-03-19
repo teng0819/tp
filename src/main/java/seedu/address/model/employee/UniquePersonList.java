@@ -17,7 +17,7 @@ import seedu.address.model.employee.exceptions.PersonNotFoundException;
  * updating of persons uses Employee#isSamePerson(Employee) for equality so as to ensure that the person being added
  * or updated is unique in terms of identity in the UniquePersonList. However, the removal of a person uses
  * Employee#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Employee#isSamePerson(Employee)
@@ -147,4 +147,26 @@ public class UniquePersonList implements Iterable<Employee> {
         }
         return true;
     }
+
+    /**
+     * Adds a task to the specified person in the list.
+     *
+     * @param target The person to add the task to.
+     * @param task   The task to be added.
+     */
+    public void addTaskToPerson(Employee target, Task task) {
+        requireNonNull(task);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+        Employee personToEdit = internalList.get(index);
+        Employee editedPerson = new Employee(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getDepartment(), personToEdit.getPosition(),
+                personToEdit.getTags(),
+                personToEdit.getTaskListStorage());
+        editedPerson.addTask(task);
+        setPerson(personToEdit, editedPerson);
+    }
+
 }

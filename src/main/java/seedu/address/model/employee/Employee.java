@@ -2,6 +2,7 @@ package seedu.address.model.employee;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents an Employee in the address book.
@@ -25,11 +27,13 @@ public class Employee {
     private final Department department;
     private final Position position;
     private final Set<Tag> tags = new HashSet<>();
+    private final TaskListStorage taskListStorage;
 
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Phone phone, Email email, Department department, Position position, Set<Tag> tags) {
+    public Employee(Name name, Phone phone, Email email, Department department,
+                    Position position, Set<Tag> tags, TaskListStorage taskListStorage) {
         requireAllNonNull(name, phone, email, position, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +41,7 @@ public class Employee {
         this.department = department;
         this.position = position;
         this.tags.addAll(tags);
+        this.taskListStorage = taskListStorage;
     }
 
     public Name getName() {
@@ -83,6 +88,15 @@ public class Employee {
     }
 
     /**
+     * Returns the TaskListStorage associated with the employee.
+     *
+     * @return the TaskListStorage associated with the employee
+     */
+    public TaskListStorage getTaskListStorage() {
+        return taskListStorage;
+    }
+
+    /**
      * Returns true if both employees have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -103,13 +117,14 @@ public class Employee {
                 && email.equals(otherPerson.email)
                 && position.equals(otherPerson.position)
                 && department.equals(otherPerson.department)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && taskListStorage.equals(otherPerson.taskListStorage);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, position, tags);
+        return Objects.hash(name, phone, email, position, tags, taskListStorage);
     }
 
     @Override
@@ -121,7 +136,25 @@ public class Employee {
                 .add("position", position)
                 .add("department", department)
                 .add("tags", tags)
+                .add("Tasks Assigned:", taskListStorage)
                 .toString();
     }
 
+    /**
+     * Returns the list of tasks assigned to the employee.
+     *
+     * @return the list of tasks assigned to the employee
+     */
+    public ArrayList<Task> getTasks() {
+        return taskListStorage.getTasks();
+    }
+
+    /**
+     * Adds a task to the employee's task list.
+     *
+     * @param task the task to be added
+     */
+    public void addTask(Task task) {
+        taskListStorage.addTask(task);
+    }
 }

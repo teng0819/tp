@@ -28,7 +28,9 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.TaskListStorage;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -59,7 +61,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -104,8 +106,10 @@ public class EditCommand extends Command {
         Department updatedDepartment = editPersonDescriptor.getDepartment().orElse(personToEdit.getDepartment());
         Position updatedPosition = editPersonDescriptor.getPosition().orElse(personToEdit.getPosition());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        TaskListStorage updatedTaskList = personToEdit.getTaskListStorage();
 
-        return new Employee(updatedName, updatedPhone, updatedEmail, updatedDepartment, updatedPosition, updatedTags);
+        return new Employee(updatedName, updatedPhone, updatedEmail, updatedDepartment,
+                updatedPosition, updatedTags, updatedTaskList);
     }
 
     @Override
@@ -144,7 +148,8 @@ public class EditCommand extends Command {
         private Position position;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.

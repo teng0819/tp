@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.TaskListStorage;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,12 +25,14 @@ public class PersonBuilder {
     public static final String DEFAULT_DEPARTMENT = "IT";
     public static final String DEFAULT_POSITION = "Software developer";
 
+
     private Name name;
     private Phone phone;
     private Email email;
     private Department department;
     private Position position;
     private Set<Tag> tags;
+    private TaskListStorage taskListStorage;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +44,7 @@ public class PersonBuilder {
         department = new Department(DEFAULT_DEPARTMENT);
         position = new Position(DEFAULT_POSITION);
         tags = new HashSet<>();
+        taskListStorage = new TaskListStorage(new ArrayList<>());
     }
 
     /**
@@ -52,6 +57,7 @@ public class PersonBuilder {
         department = personToCopy.getDepartment();
         position = personToCopy.getPosition();
         tags = new HashSet<>(personToCopy.getTags());
+        taskListStorage = personToCopy.getTaskListStorage();
     }
 
     /**
@@ -102,8 +108,23 @@ public class PersonBuilder {
         return this;
     }
 
+
+    /**
+     * Builds and returns the {@code Employee} object with the given details.
+     * @return the Employee object with the given details
+     */
     public Employee build() {
-        return new Employee(name, phone, email, department, position, tags);
+        return new Employee(name, phone, email, department, position, tags, taskListStorage);
+    }
+
+    /**
+     * Sets the {@code TaskListStorage} of the {@code Employee} that we are building.
+     * @param taskListStorage the TaskListStorage to set for the Employee being built.
+     * @return the PersonBuilder object with the given TaskListStorage
+     */
+    public PersonBuilder withTaskListStorage(TaskListStorage taskListStorage) {
+        this.taskListStorage = new TaskListStorage(taskListStorage.getTasks());
+        return this;
     }
 
 }

@@ -44,6 +44,9 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" >
       <VBox.margin><Insets top="5" bottom="5" /></VBox.margin>
       </Label>
+      <Label fx:id="tasks" styleClass="cell_small_label" text="\$tasks" >
+        <VBox.margin><Insets top="5" bottom="5" /></VBox.margin>
+      </Label>
     </VBox>
   </GridPane>
 </HBox>

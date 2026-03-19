@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.employee.Task;
+import seedu.address.storage.TaskList;
+
 public class TaskListTest {
 
     @Test
@@ -15,8 +18,8 @@ public class TaskListTest {
 
         t2.markAsCompleted();
 
-        taskList.addTask(t1);
-        taskList.addTask(t2);
+        taskList.addTaskOverall(t1);
+        taskList.addTaskOverall(t2);
 
         taskList.removeCompletedTasks();
         assertTrue(true);

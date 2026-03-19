@@ -1,9 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.employee.Task;
 
 /**
  * A list of tasks.
@@ -17,7 +19,7 @@ public class TaskList {
      *
      * @param task The task to be added. Must not be null.
      */
-    public void addTask(Task task) {
+    public void addTaskOverall(Task task) {
         requireNonNull(task);
         internalList.add(task);
     }
