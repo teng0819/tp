@@ -19,8 +19,8 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
-import seedu.address.model.person.Task;
-import seedu.address.storage.TaskListStorage;
+import seedu.address.model.employee.Task;
+import seedu.address.model.employee.TaskListStorage;
 
 class AddTaskCommandTest {
 

@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
 
 /**
  * Adds a task to a person's task list in the address book.

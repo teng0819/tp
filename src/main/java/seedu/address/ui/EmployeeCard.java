@@ -9,7 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
 
 /**
  * An UI component that displays information of a {@code Employee}.

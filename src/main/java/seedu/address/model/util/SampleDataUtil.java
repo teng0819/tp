@@ -13,9 +13,10 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
+import seedu.address.model.employee.TaskListStorage;
 import seedu.address.model.tag.Tag;
-import seedu.address.storage.TaskListStorage;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -24,28 +25,28 @@ public class SampleDataUtil {
     public static Employee[] getSamplePersons() {
         Task a = new Task("Task 1", "2024-06-30");
         Task b = new Task("Task 2", "2024-07-01");
-        TaskListStorage taskList = new TaskListStorage(new ArrayList<>());
-        taskList.addTask(a);
-        taskList.addTask(b);
+        TaskListStorage taskListStorageSample = new TaskListStorage(new ArrayList<>());
+        taskListStorageSample.addTask(a);
+        taskListStorageSample.addTask(b);
         return new Employee[] {
             new Employee(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Department("IT"), new Position("Junior software developer"),
-                getTagSet("friends"), taskList),
+                    new Department("IT"), new Position("Junior software developer"),
+                    getTagSet("friends"), taskListStorageSample),
             new Employee(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Department("Sales"), new Position("HR manager"),
-                getTagSet("colleagues", "friends"), taskList),
+                    new Department("Sales"), new Position("HR manager"),
+                    getTagSet("colleagues", "friends"), taskListStorageSample),
             new Employee(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Department("HR"), new Position("Team leader"),
-                getTagSet("neighbours"), taskList),
+                    new Department("HR"), new Position("Team leader"),
+                    getTagSet("neighbours"), taskListStorageSample),
             new Employee(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Department("Marketing"), new Position("Marketing lead"),
-                getTagSet("family"), taskList),
+                    new Department("Marketing"), new Position("Marketing lead"),
+                    getTagSet("family"), taskListStorageSample),
             new Employee(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Department("Finance"), new Position("Frontend developer"),
-                getTagSet("classmates"), taskList),
+                    new Department("Finance"), new Position("Frontend developer"),
+                    getTagSet("classmates"), taskListStorageSample),
             new Employee(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Department("Creative"), new Position("Product manager"),
-                getTagSet("colleagues"), taskList)
+                    new Department("Creative"), new Position("Product manager"),
+                    getTagSet("colleagues"), taskListStorageSample)
         };
     }
 

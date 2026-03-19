@@ -16,6 +16,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
+import seedu.address.model.employee.TaskListStorage;
 import seedu.address.model.tag.Tag;
 
 /**

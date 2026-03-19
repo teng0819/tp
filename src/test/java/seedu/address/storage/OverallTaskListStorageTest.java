@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
+import seedu.address.model.employee.TaskListStorage;
 
 class TaskListStorageTest {
 

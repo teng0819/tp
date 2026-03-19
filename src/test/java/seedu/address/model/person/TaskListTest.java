@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.employee.Task;
+import seedu.address.storage.TaskList;
+
 public class TaskListTest {
 
     @Test

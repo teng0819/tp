@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
 
 class AddTaskCommandParserTest {
     public static final String VALID_TASK_NAME_1 = "Task 1";

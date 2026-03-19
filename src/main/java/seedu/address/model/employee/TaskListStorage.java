@@ -1,8 +1,7 @@
-package seedu.address.storage;
+package seedu.address.model.employee;
 
 import java.util.ArrayList;
 
-import seedu.address.model.person.Task;
 
 /**
  * A class to represent the storage of TaskList.

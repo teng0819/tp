@@ -1,9 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.employee.Task;
 
 /**
  * A list of tasks.

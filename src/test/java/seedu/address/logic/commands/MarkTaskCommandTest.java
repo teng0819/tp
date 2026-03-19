@@ -4,18 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Task;
+import seedu.address.model.employee.Task;
 
 public class MarkTaskCommandTest {
 
     @Test
     public void execute_markTask_noCrash() {
-        Model model = new ModelManager();
+        ModelManager model = new ModelManager();
 
         Task task = new Task("Sample Task", "Description");
-        model.addTask(task);
+        model.addTaskOverall(task);
 
         MarkTaskCommand cmd = new MarkTaskCommand(0);
 
