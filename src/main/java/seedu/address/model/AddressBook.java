@@ -101,6 +101,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Deletes the task with the specified task index from the overall task list
+     * and the assigned employee's task list.
+     *
+     * @param taskIndex the displayed task index
+     */
     public void deleteTask(int taskIndex) {
         Employee assignedPerson = tasks.getPersonAssignedToTask(taskIndex);
         Task deletedTask = tasks.deleteTask(taskIndex);
