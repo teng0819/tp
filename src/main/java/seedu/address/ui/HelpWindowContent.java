@@ -63,6 +63,28 @@ public final class HelpWindowContent {
     }
 
     /**
+     * Returns a formatted help message for the help window body.
+     */
+    public static String getFormattedHelpText() {
+        return getDisplaySections().stream()
+                .map(HelpWindowContent::formatDisplaySection)
+                .reduce((first, second) -> first + "\n\n" + second)
+                .orElse("");
+    }
+
+    private static String formatDisplaySection(HelpSectionDisplay section) {
+        return concatDisplayLines(section.headerLines(), section.exampleLines());
+    }
+
+    private static String concatDisplayLines(List<DisplayLine> headerLines, List<DisplayLine> exampleLines) {
+        return List.of(headerLines, exampleLines).stream()
+                .flatMap(List::stream)
+                .map(DisplayLine::text)
+                .reduce((first, second) -> first + "\n" + second)
+                .orElse("");
+    }
+
+    /**
      * Represents one command section in the help window.
      */
     public record HelpSection(String commandWord, String description, String allowedInput, List<String> examples) { }

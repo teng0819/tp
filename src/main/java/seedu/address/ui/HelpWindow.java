@@ -4,14 +4,11 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.ui.HelpWindowContent.DisplayLine;
-import seedu.address.ui.HelpWindowContent.HelpSectionDisplay;
 
 /**
  * Controller for a help page
@@ -27,7 +24,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private VBox helpSections;
+    private TextArea helpContent;
 
     /**
      * Creates a new HelpWindow.
@@ -36,7 +33,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        populateHelpSections();
+        helpContent.setText(HelpWindowContent.getFormattedHelpText());
+        helpContent.positionCaret(0);
     }
 
     /**
@@ -68,36 +66,7 @@ public class HelpWindow extends UiPart<Stage> {
         logger.fine("Showing help page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
-    }
-
-    private void populateHelpSections() {
-        assert helpSections != null;
-        helpSections.getChildren().clear();
-
-        HelpWindowContent.getDisplaySections().stream()
-                .map(HelpWindow::createSectionCard)
-                .forEach(helpSections.getChildren()::add);
-    }
-
-    private static VBox createSectionCard(HelpSectionDisplay section) {
-        VBox sectionCard = new VBox(8);
-        sectionCard.getStyleClass().add("help-section-card");
-
-        section.headerLines().stream()
-                .map(HelpWindow::createStyledLabel)
-                .forEach(sectionCard.getChildren()::add);
-        section.exampleLines().stream()
-                .map(HelpWindow::createStyledLabel)
-                .forEach(sectionCard.getChildren()::add);
-
-        return sectionCard;
-    }
-
-    private static Label createStyledLabel(DisplayLine line) {
-        Label label = new Label(line.text());
-        label.setWrapText(true);
-        label.getStyleClass().add(line.styleClass());
-        return label;
+        helpContent.positionCaret(0);
     }
 
     /**

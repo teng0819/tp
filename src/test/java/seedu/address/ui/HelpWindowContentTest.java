@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -47,5 +48,25 @@ public class HelpWindowContentTest {
                 new DisplayLine("Example: delete John Doe", "help-command-example"),
                 new DisplayLine("Example: delete 2", "help-command-example")),
                 displaySections.get(2).exampleLines());
+    }
+
+    @Test
+    public void getFormattedHelpText_returnsFormattedHelpBody() {
+        String formattedHelpText = HelpWindowContent.getFormattedHelpText();
+
+        assertEquals("""
+                help
+                Shows this in-app help window.
+                Allowed input: No additional parameters.
+                Example: help
+
+                add
+                Adds an employee.
+                Allowed input: n/NAME p/PHONE e/EMAIL d/DEPARTMENT pos/POSITION [t/TAG]...
+                Example: add n/John Doe p/98765432 e/johnd@example.com d/IT pos/Software Engineer t/fulltime
+                """.stripTrailing(), formattedHelpText.lines().limit(9).reduce((a, b) -> a + "\n" + b).orElse(""));
+        assertTrue(formattedHelpText.contains("Example: delete John Doe"));
+        assertTrue(formattedHelpText.contains("Example: delete 2"));
+        assertTrue(formattedHelpText.contains("exit"));
     }
 }
