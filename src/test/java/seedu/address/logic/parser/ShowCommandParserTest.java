@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
@@ -324,5 +328,40 @@ public class ShowCommandParserTest {
                 expectedCommand);
     }
 
+    @Test
+    public void parse_nullArgs_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> parser.parse(null));
+    }
+
+    @Test
+    public void extract_nullInput_throwsAssertionError() throws Exception {
+        Method method = ShowCommandParser.class.getDeclaredMethod("extract", String.class, String.class);
+        method.setAccessible(true);
+
+        InvocationTargetException exception = assertThrows(InvocationTargetException.class,
+                () -> method.invoke(parser, null, "n/"));
+
+        assertEquals(AssertionError.class, exception.getCause().getClass());
+    }
+
+    @Test
+    public void extract_nullPrefix_throwsAssertionError() throws Exception {
+        Method method = ShowCommandParser.class.getDeclaredMethod("extract", String.class, String.class);
+        method.setAccessible(true);
+
+        InvocationTargetException exception = assertThrows(InvocationTargetException.class,
+                () -> method.invoke(parser, "n/Alex", null));
+
+        assertEquals(AssertionError.class, exception.getCause().getClass());
+    }
+
+    @Test
+    public void extract_missingPrefix_returnsEmptyString() throws Exception {
+        Method method = ShowCommandParser.class.getDeclaredMethod("extract", String.class, String.class);
+        method.setAccessible(true);
+
+        String result = (String) method.invoke(parser, "n/Alex", "d/");
+        assertEquals("", result);
+    }
 
 }

@@ -104,5 +104,4 @@ public class EmailContainsKeywordsPredicateTest {
     public void constructor_nullKeywords_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new EmailContainsKeywordsPredicate(null));
     }
-
 }
