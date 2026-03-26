@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
@@ -16,7 +16,68 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_WINDOW_CONTENT = String.join("\n",
+            "ManageUp Command Guide",
+            "",
+            "help",
+            "  Shows this in-app help window.",
+            "  Allowed input: no additional parameters.",
+            "  Example: help",
+            "",
+            "add",
+            "  Adds an employee.",
+            "  Allowed input: n/NAME p/PHONE e/EMAIL d/DEPARTMENT pos/POSITION [t/TAG]...",
+            "  Example: add n/John Doe p/98765432 e/johnd@example.com d/IT pos/Software Engineer t/fulltime",
+            "",
+            "delete",
+            "  Deletes an employee by unique name or list index.",
+            "  Allowed input: NAME or INDEX.",
+            "  Example: delete John Doe",
+            "  Example: delete 2",
+            "",
+            "edit",
+            "  Edits an employee identified by index.",
+            "  Allowed input: INDEX with one or more optional fields",
+            "  Fields: [n/NAME] [p/PHONE] [e/EMAIL] [d/DEPARTMENT] [pos/POSITION] [t/TAG]...",
+            "  Example: edit 1 p/91234567 e/johndoe@example.com",
+            "",
+            "find",
+            "  Finds employees whose names contain any keyword.",
+            "  Allowed input: KEYWORD [MORE_KEYWORDS]...",
+            "  Example: find alice bob charlie",
+            "",
+            "list",
+            "  Lists all employees.",
+            "  Allowed input: no additional parameters.",
+            "  Example: list",
+            "",
+            "show",
+            "  Filters employees by one or more fields.",
+            "  Allowed input: at least one of n/ d/ p/ e/ pos/ t/ task/",
+            "  Example: show n/Alex d/IT",
+            "",
+            "addtask",
+            "  Adds a task to an employee by name.",
+            "  Allowed input: task/TASK_NAME desc/TASK_DESCRIPTION n/EMPLOYEE_NAME",
+            "  Example: addtask task/Prepare Report desc/Submit by Friday n/John Doe",
+            "",
+            "deletetask",
+            "  Deletes a task by task index.",
+            "  Allowed input: INDEX.",
+            "  Example: deletetask 1",
+            "",
+            "clear",
+            "  Clears all employees from the address book.",
+            "  Allowed input: no additional parameters.",
+            "  Example: clear",
+            "",
+            "exit",
+            "  Exits ManageUp.",
+            "  Allowed input: no additional parameters.",
+            "  Example: exit",
+            "",
+            "Online user guide:",
+            USERGUIDE_URL);
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -25,7 +86,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label helpMessage;
+    private TextArea helpContent;
 
     /**
      * Creates a new HelpWindow.
@@ -34,7 +95,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpContent.setText(HELP_WINDOW_CONTENT);
+        helpContent.positionCaret(0);
     }
 
     /**
@@ -66,6 +128,7 @@ public class HelpWindow extends UiPart<Stage> {
         logger.fine("Showing help page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
+        helpContent.positionCaret(0);
     }
 
     /**
