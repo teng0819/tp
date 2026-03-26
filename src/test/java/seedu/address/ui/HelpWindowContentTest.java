@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.ui.HelpWindowContent.DisplayLine;
-import seedu.address.ui.HelpWindowContent.HelpSectionDisplay;
 import seedu.address.ui.HelpWindowContent.HelpSection;
+import seedu.address.ui.HelpWindowContent.HelpSectionDisplay;
 
 public class HelpWindowContentTest {
 
