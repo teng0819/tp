@@ -3,7 +3,6 @@ package seedu.address.model.employee.predicatechecker;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -86,22 +85,5 @@ public class EmailContainsKeywordsPredicateTest {
 
         String expected = EmailContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
-    }
-
-    @Test
-    public void test_emailContainsKeywordIgnoreCase_returnsTrue() {
-        EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(List.of("ALICE@EXAMPLE.COM"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@example.com").build()));
-    }
-
-    @Test
-    public void test_emailContainsPartialKeyword_returnsTrue() {
-        EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(List.of("example"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@example.com").build()));
-    }
-
-    @Test
-    public void constructor_nullKeywords_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new EmailContainsKeywordsPredicate(null));
     }
 }

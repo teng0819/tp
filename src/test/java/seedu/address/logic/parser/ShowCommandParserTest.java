@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -335,28 +338,37 @@ public class ShowCommandParserTest {
 
     @Test
     public void extract_nullInput_throwsAssertionError() throws Exception {
+        ShowCommandParser parser = new ShowCommandParser();
         Method method = ShowCommandParser.class.getDeclaredMethod("extract", String.class, String.class);
         method.setAccessible(true);
 
-        InvocationTargetException exception = assertThrows(InvocationTargetException.class,
-                () -> method.invoke(parser, null, "n/"));
-
-        assertEquals(AssertionError.class, exception.getCause().getClass());
+        try {
+            method.invoke(parser, new Object[] {null, "n/"});
+            fail("Expected InvocationTargetException to be thrown");
+        } catch (InvocationTargetException e) {
+            assertNotNull(e.getCause());
+            assertTrue(e.getCause() instanceof AssertionError);
+        }
     }
 
     @Test
     public void extract_nullPrefix_throwsAssertionError() throws Exception {
+        ShowCommandParser parser = new ShowCommandParser();
         Method method = ShowCommandParser.class.getDeclaredMethod("extract", String.class, String.class);
         method.setAccessible(true);
 
-        InvocationTargetException exception = assertThrows(InvocationTargetException.class,
-                () -> method.invoke(parser, "n/Alex", null));
-
-        assertEquals(AssertionError.class, exception.getCause().getClass());
+        try {
+            method.invoke(parser, new Object[] {"n/Alex", null});
+            fail("Expected InvocationTargetException to be thrown");
+        } catch (InvocationTargetException e) {
+            assertNotNull(e.getCause());
+            assertTrue(e.getCause() instanceof AssertionError);
+        }
     }
 
     @Test
     public void extract_missingPrefix_returnsEmptyString() throws Exception {
+        ShowCommandParser parser = new ShowCommandParser();
         Method method = ShowCommandParser.class.getDeclaredMethod("extract", String.class, String.class);
         method.setAccessible(true);
 

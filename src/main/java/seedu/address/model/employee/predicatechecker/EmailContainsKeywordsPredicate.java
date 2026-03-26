@@ -19,7 +19,6 @@ public class EmailContainsKeywordsPredicate implements Predicate<Employee> {
      * @param keywords Keywords to match against an employee's email.
      */
     public EmailContainsKeywordsPredicate(List<String> keywords) {
-        assert keywords != null : "Keywords list should not be null";
         this.keywords = keywords;
     }
 

@@ -19,7 +19,8 @@ public class Assert {
      *
      * @return
      */
-    public static InvocationTargetException assertThrows(Class<? extends Throwable> expectedType, Executable executable) {
+    public static InvocationTargetException assertThrows(Class<? extends Throwable> expectedType,
+                                                         Executable executable) {
         Assertions.assertThrows(expectedType, executable);
         return null;
     }
