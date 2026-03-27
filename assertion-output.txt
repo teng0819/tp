@@ -1,0 +1,34 @@
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :run FAILED
+Mar 26, 2026 11:49:07 AM seedu.address.Main main
+WARNING: The warning about Unsupported JavaFX configuration below (if any) can be ignored.
+Mar 26, 2026 11:49:07 AM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Exception in Application init method
+Exception in thread "main" java.lang.RuntimeException: Exception in Application init method
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:888)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication$2(LauncherImpl.java:196)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.lang.AssertionError: Intentional assertion failure for tutorial verification
+	at seedu.address.MainApp.init(MainApp.java:53)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:817)
+	... 2 more
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':run'.
+> Process 'command '/Users/Grace/.sdkman/candidates/java/17.0.14.fx-zulu/zulu-17.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 849ms
+3 actionable tasks: 1 executed, 2 up-to-date
