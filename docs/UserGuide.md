@@ -66,7 +66,7 @@ contact details, roles, departments, and assigned tasks more efficiently.
 
    * `addtask task/Prepare Report desc/Submit by Friday n/John Doe` : Adds a task to employee `John Doe`.
 
-   * `deletetask 1` : Deletes the task with task index `1`.
+   * `deletetask 1 3` : Deletes the tasks with task indices `1` and `3`.
 
    * `show d/IT` : Shows employees whose department contains `IT`.
 
@@ -353,17 +353,18 @@ Examples:
 <a id="deleting-a-task"></a>
 ### Deleting a task : `deletetask`
 
-Deletes a task using its displayed task index.
+Deletes one or more tasks using their displayed task indices.
 
-Format: `deletetask INDEX`
+Format: `deletetask INDEX [MORE_INDICES]...`
 
 * `INDEX` refers to the task index shown beside the task on the employee card, for example `#1`.
 * The index **must be a positive integer** 1, 2, 3, …
+* You can provide multiple task indices in one command to batch delete tasks.
 * Deleting a task removes it from both the employee's task list and the overall task list used internally by the app.
 
 Examples:
 * `deletetask 1`
-* `deletetask 3`
+* `deletetask 1 3 5`
 
 <a id="clearing-all-entries"></a>
 ### Clearing all entries : `clear`
@@ -427,5 +428,5 @@ _More features coming soon ..._
 | Show filtered employees from contacts | **Show**     | `show [n/NAME] [d/DEPARTMENT] [p/PHONE] [e/EMAIL] [pos/POSITION] [t/TAG] [task/TASK]...` <br> e.g., `show n/Ja d/Finance pos/Develepor HR Management t/Nightshift` |
 | Delete ALL employees from contacts    | **Clear**    | `clear`                                                                                                                                                            |
 | Add tasks to an employee              | **Add Task** | `addtask task/TASK_NAME desc/TASK_DESCRIPTION n/EMPLOYEE_NAME`<br> e.g., `addtask task/Prepare Slides desc/Send by Friday n/James Ho`                              |
-| Delete a task                         | **Delete Task** | `deletetask INDEX`<br> e.g., `deletetask 1`                                                                                                                     |
+| Delete a task                         | **Delete Task** | `deletetask INDEX [MORE_INDICES]...`<br> e.g., `deletetask 1`, `deletetask 1 3 5`                                                                             |
 | Display help message                  | **Help**     | `help`                                                                                                                                                             |
