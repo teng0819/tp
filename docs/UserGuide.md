@@ -131,7 +131,7 @@ Shows an in-app help window with supported commands, allowed inputs, and example
 
 Format: `help`
 
-#### How it works
+#### Overview
 
 When you enter `help`, ManageUp opens a separate help window inside the app.
 
@@ -143,22 +143,24 @@ The help window gives a quick summary of:
 
 This is useful when you want a quick reminder without scrolling through the full User Guide.
 
-#### What you will see
+#### Command usage
+
+`help` does not require any additional parameters.
+
+If you type extra text after `help`, ManageUp will still interpret it as `help`.
 
 The help window displays a compact command reference and a button that copies the online User Guide URL to your
 clipboard so you can open the full guide in a browser if needed.
 
 ![help message](images/helpMessage.png)
 
-#### Notes
+#### Important notes
 
 <box type="tip" seamless>
 
 **Tip:** Use `help` when you forget a command format or want a quick example before trying a command.
 </box>
 
-* `help` does not require any additional parameters.
-* If you type extra text after `help`, ManageUp will still interpret it as `help`.
 * The help window is intended as a quick reference. The full User Guide still contains more detailed explanations and examples.
 
 <box type="warning" seamless>
@@ -167,7 +169,7 @@ clipboard so you can open the full guide in a browser if needed.
 You need to restore the minimized Help Window manually.
 </box>
 
-#### Example
+#### Examples
 
 * `help`
   Opens the in-app Help Window.
@@ -377,7 +379,7 @@ Deletes one or more specified employees from the address book.
 
 Format: `delete NAME` or `delete INDEX [MORE_INDEXES]...`
 
-#### How it works
+#### Overview
 
 The `delete` command supports two ways to remove employees:
 
@@ -391,7 +393,9 @@ refer to the filtered list instead of the full list.
 
 ![ManageUp main window](images/Ui.png)
 
-#### Deleting by index
+#### Command usage
+
+##### Deleting by index
 
 Use `delete INDEX` when you want to remove one displayed employee by position in the current list.
 
@@ -399,7 +403,7 @@ Use `delete INDEX` when you want to remove one displayed employee by position in
 * The index **must be a positive integer** such as `1`, `2`, or `3`.
 * Index-based deletion is useful when multiple employees have similar or identical names.
 
-#### Deleting by name
+##### Deleting by name
 
 Use `delete NAME` when you want to remove an employee by name instead of list position.
 
@@ -407,13 +411,7 @@ Use `delete NAME` when you want to remove an employee by name instead of list po
 * Extra spaces in the input are ignored.
 * The entered name must match **one unique employee** in the currently displayed list.
 
-<box type="warning" seamless>
-
-**Warning:** If more than one displayed employee has the same name, `delete NAME` will fail. In that case, use
-`delete INDEX` instead.
-</box>
-
-#### Batch deleting multiple employees
+##### Batch deletion
 
 You can delete several employees in one command by listing multiple indexes.
 
@@ -423,7 +421,7 @@ You can delete several employees in one command by listing multiple indexes.
 
 This prevents partial deletion when one of the indexes is wrong.
 
-#### Notes
+#### Important notes
 
 <box type="tip" seamless>
 
@@ -436,18 +434,24 @@ reset to the full list.
 * If an invalid index is provided, no employee will be deleted.
 * If no employee matches the given name, the command will fail.
 
+<box type="warning" seamless>
+
+**Warning:** If more than one displayed employee has the same name, `delete NAME` will fail. In that case, use
+`delete INDEX` instead.
+</box>
+
 #### Examples
 
-* `list` followed by `delete 2`
+- `list` followed by `delete 2`
   Deletes the 2nd employee in the full employee list.
 
-* `show d/HR` followed by `delete 1`
+- `show d/HR` followed by `delete 1`
   Deletes the 1st employee in the filtered employee list.
 
-* `list` followed by `delete 1 3 5`
+- `list` followed by `delete 1 3 5`
   Deletes the 1st, 3rd, and 5th employees in the displayed employee list.
 
-* `delete John Doe`
+- `delete John Doe`
   Deletes the employee named `John Doe` if exactly one displayed employee matches that name.
 
 <a id="adding-a-task-to-an-employee"></a>
