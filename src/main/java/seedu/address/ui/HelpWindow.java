@@ -77,10 +77,18 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        prepareWindowForShow();
+        getRoot().show();
+        positionWindow();
+    }
+
+    void prepareWindowForShow() {
         // Keep help as a lightweight secondary window even if the main app is full screen.
         getRoot().setFullScreen(false);
         getRoot().setMaximized(false);
-        getRoot().show();
+    }
+
+    void positionWindow() {
         getRoot().centerOnScreen();
         helpContent.positionCaret(0);
     }
