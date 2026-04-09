@@ -201,15 +201,20 @@ When a new task is created, the task is assigned the next available task index. 
 
 #### Add task implementation
 
-`addtask` is parsed by `AddTaskCommandParser`, which extracts the task name, task description, and employee name from
+`addtask` is parsed by `AddTaskCommandParser`, which extracts the task name, task description, and employee index from
 the command input before constructing an `AddTaskCommand`.
 
 During execution:
 
-1. The command finds the target employee by name.
-2. A new `Task` is created with an assigned task index.
-3. The task is added to the employee's own `TaskListStorage`.
-4. The same task is also added to the overall in-memory `TaskList`.
+1. `AddressBookParser` recognises the `addtask` command and delegates parsing to `AddTaskCommandParser`.
+2. `AddTaskCommandParser` extracts the task name, task description, and employee index from the command input.
+3. A new `Task` is created with the extracted details and an assigned task index.
+4. `AddTaskCommandParser` constructs an `AddTaskCommand` with the new `Task` and employee index.
+5. `AddTaskCommand` calls `Model#addTask(task, employeeIndex)`.
+6. `ModelManager` forwards the request to `AddressBook`, together with the overall in-memory `TaskList`.
+7. `AddressBook` updates the overall `TaskList` to include the new task and its owning employee.
+8. The task is also updated to the employee's own `TaskListStorage`.
+
 
 This two-level update ensures that the task is both visible on the employee card and discoverable by future task
 commands that operate by task index.
