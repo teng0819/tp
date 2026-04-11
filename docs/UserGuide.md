@@ -87,7 +87,7 @@ To support more efficient employee management, ManageUp:
 
    * `delete 1 3 5` : Deletes the 1st, 3rd, and 5th employees in the currently displayed list.
 
-   * `addtask task/Prepare Report desc/Submit by Friday n/John Doe` : Adds a task to employee `John Doe`.
+   * `addtask 1 task/Prepare Report desc/Submit by Friday` : Adds a task to employee at index 1 in current list.
 
    * `deletetask 1 3` : Deletes the tasks with task indices `1` and `3`.
 
