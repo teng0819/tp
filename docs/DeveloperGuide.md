@@ -511,6 +511,10 @@ Use case ends.
 * **Employee**: A staff member stored in the system whose details and tasks are managed by the application.
 * **Task**: A piece of work assigned to an employee that may include a description and deadline.
 * **Department**: A category used to group employees within an organisation.
+* **Task index**: A unique absolute identifier assigned to a task when it is created. Commands such as `edittask` and `deletetask` operate on this index.
+* **Filtered employee list**: The currently displayed list of employees after commands such as `list` or `show` are applied.
+* **TaskListStorage**: The per-employee in-memory storage that holds the tasks shown on one employee card.
+* **Overall TaskList**: The global in-memory mapping of `Task -> Employee` used to locate the owning employee during task operations.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

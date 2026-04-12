@@ -522,16 +522,18 @@ Examples:
 <a id="deleting-a-task"></a>
 ### Deleting a task : `deletetask`
 
-Deletes one or more tasks using their displayed task indices.
+Deletes one or more tasks using their absolute task indices.
 
 Format: `deletetask INDEX [MORE_INDICES]...`
 
-* `INDEX` refers to the task index shown beside the task on the employee card, for example `#1`.
+* `INDEX` refers to the absolute task index assigned to the task, for example `#1`.
 * Each index **must be a positive integer** 1, 2, 3, …​
 * You can provide multiple task indices in one command to batch delete tasks.
 * When multiple task indices are provided, every task index must be valid before any task is deleted.
 * Duplicate task indices in the same command are not allowed.
 * `deletetask` removes the task from both the employee's personal task list and the overall task list used internally by ManageUp.
+* `deletetask` does not depend on the currently displayed employee list. As long as a task with that absolute task index exists, it can be deleted.
+* This means that even after applying a filter with `show`, a task can still be deleted if its absolute task index is known.
 * If an invalid task index is provided, ManageUp will reject the command and no task will be deleted.
 * `deletetask` provides a warning message to the user with the specified format to remind users of the correct format if the command is invalid.
 
@@ -602,5 +604,5 @@ _More features coming soon ..._
 | Delete ALL employees from contacts    | **Clear**       | `clear`                                                                                                                                                            |
 | Add tasks to an employee              | **Add Task**    | `addtask task/TASK_NAME desc/TASK_DESCRIPTION n/EMPLOYEE_NAME`<br> e.g., `addtask task/Prepare Slides desc/Send by Friday n/James Ho`                              |
 | Edit a task                           | **Edit Task**   | `edittask TASK_INDEX task/TASK_NAME desc/TASK_DESCRIPTION `<br> e.g., `edittask 6 task/Close deal desc/Finalise by Wednesday `                                     |
-| Delete a task                         | **Delete Task** | `deletetask TASK_INDEX`<br> e.g., `deletetask 1`                                                                                                                   |
+| Delete a task                         | **Delete Task** | `deletetask TASK_INDEX [MORE_TASK_INDEXES]...`<br> e.g., `deletetask 1`, `deletetask 1 3`                                                                         |
 | Display help message                  | **Help**        | `help`                                                                                                                                                             |
