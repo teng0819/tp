@@ -49,7 +49,7 @@ New to ManageUp? Start with [Quick Start](#quick-start). Already installed? Jump
     * [Editing an employee: `edit`](#editing-an-employee)
     * [Deleting an employee: `delete`](#deleting-an-employee)
   * Task management
-    * [Adding a task to an employee: `addtask`](#adding-a-task-to-an-employee)
+    * [Adding a task: `addtask`](#adding-a-task-to-an-employee)
     * [Editing a task: `edittask`](#editing-a-task)
     * [Deleting a task: `deletetask`](#deleting-a-task)
     * [Clearing all tasks for an employee: `cleartasks`](#clearing-all-tasks-for-an-employee)
@@ -635,40 +635,57 @@ For example, entering `delete john doe` fails because multiple displayed employe
   Deletes the employee named `John Doe` if exactly one displayed employee matches that name.
 
 <a id="adding-a-task-to-an-employee"></a>
-### Adding a task to an employee : `addtask`
+### Adding a task: `addtask`
 
-Adds a task to a specific employee.
+Adds a task to a specific employee identified by employee index.
 
-Format: `addtask EMPLOYEE_INDEX task/TASK_NAME desc/TASK_DESCRIPTION`
+Format: 
+```
+addtask EMPLOYEE_INDEX task/TASK_NAME desc/TASK_DESCRIPTION
+```
 
 * `EMPLOYEE_INDEX` refers to the employee index shown in the currently displayed employee list.
 * The task will be added to that employee's personal task list and shown on the employee card.
 * The task will have an index number attached to it, to indicate task number.
-* A task name between 1 and 40 characters and a task description between 1 and 120 characters must be provided.
 * Only 1 `task/` and 1 `desc/` are allowed in the command. Duplicate prefixes are not allowed.
+* Both `task/` and `desc/` must be provided.
 * The format and order of `task/` and `desc/` should be followed exactly as stated in the format and no field should be left out.
-* `addtask` provides a warning message to the user with the specified format to remind users of the correct format if the command is invalid.
-* `addtask 1 task/Prepare Report` is not valid because the description field is missing.
 
-Examples:
+<box type="info" seamless>
+
+**Note:** This task index number does not follow a sequence and is merely a way to identify the task on the employee card. For example, if an employee has 2 tasks, and you delete the first one, the second task will still have the index `#2` on the employee card. If you add another task after that, it will be indexed as `#3` on the employee card.
+
+</box>
+
+
+<box type="info" seamless>
+
+**Parameter constraints for this command:**
+
+| Parameter          | Length                                                | Allowed Characters                                        |
+|--------------------|-------------------------------------------------------|-----------------------------------------------------------|
+| `EMPLOYEE_INDEX`   | – | Positive integer that exists in the current employee list |
+| `TASK_NAME`        | 1–40 characters                                       | Any characters                                            |
+| `TASK_DESCRIPTION` | 1–120 characters                                      | Any characters                                            |
+
+</box>
+
+
+#### Examples
 * `addtask 2 task/Prepare Report desc/Submit by Friday` 
    adds a task named `Prepare Report` with description `Submit by Friday` to employee at index 2.
 * `addtask 2 task/Client Followup desc/Call client before Monday` 
    adds a task named `Client Followup` with description `Call client before Monday` to employee at index 2.
 
-  ![addTask message](images/addtaskmessage.png)
-* `addtask`
-   shows the warning message with the correct format for `addtask` because the command is invalid.
-  ![addTaskHelp message](images/addtaskhelp.png)
-* `addtask 1 task/TASK_NAME_MORE_THAN_40_CHARACTERS desc/Submit by Friday`
-   shows the warning message because the task name exceeds the character limit.
-  ![addTaskNameTooLong message](images/addtasknametoolong.png)
-* `addtask 1 task/Prepare Report desc/TASK_DESCRIPTION_MORE_THAN_120_CHARACTERS`
-   shows the warning message because the task description exceeds the character limit.
-  ![addTaskDescTooLong message](images/addtaskdesctoolong.png)
-* `addtask INVLAID_EMPLOYEE_INDEX task/Prepare Report desc/Submit by Friday`
-   shows the warning message because the employee index is invalid.
-  ![addTaskInvalidEmployeeIndex message](images/addtaskinvalidemployeeindex.png)
+<box type="info" seamless>
+
+**Expected output:**
+![addTask message](images/addtaskmessage.png)
+
+</box>
+
+#### Errors
+Facing errors? See [Troubleshooting `addtask`](#troubleshooting-addtask).
 
 <a id="editing-a-task"></a>
 ### Editing a task: `edittask`
@@ -725,51 +742,114 @@ Facing errors? See [Troubleshooting `edittask`](#troubleshooting-edittask).
 <a id="deleting-a-task"></a>
 ### Deleting a task : `deletetask`
 
-Deletes one or more tasks using their displayed task indices.
+Deletes one or more tasks identified by their absolute task indices.
 
-Format: `deletetask INDEX [MORE_INDICES]...`
+Format:
+```text
+deletetask INDEX [MORE_INDICES]...
+```
 
-* `INDEX` refers to the task index shown beside the task on the employee card, for example `#1`.
-* Each index **must be a positive integer** 1, 2, 3, …​
-* You can provide multiple task indices in one command to batch delete tasks.
-* When multiple task indices are provided, every task index must be valid before any task is deleted.
-* Duplicate task indices in the same command are not allowed.
-* `deletetask` removes the task from both the employee's personal task list and the overall task list used internally by ManageUp.
-* If an invalid task index is provided, ManageUp will reject the command and no task will be deleted.
-* `deletetask` provides a warning message to the user with the specified format to remind users of the correct format if the command is invalid.
+* `INDEX` refers to the absolute task index assigned to the task.
+* At least one task index must be provided.
+* Duplicate task indices are not allowed.
 
-Examples:
-* `deletetask 1` deletes the task with task index `1`.
+<box type="info" seamless>
 
+**Parameter constraints for this command:**
+
+| Parameter | Constraints |
+|-----------|-------------|
+| `INDEX` | Positive integer referring to an existing absolute task index |
+| `MORE_INDICES` | Additional positive integers referring to existing absolute task indices |
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** `deletetask` uses the task's absolute task index, not the employee index.
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** `deletetask` does not depend on the currently displayed employee list. Even after applying a filter with `show`, a task can still be deleted if its absolute task index is known.
+
+</box>
+
+#### Examples
+
+* `deletetask 1` – deletes the task with absolute task index `1`.
+* `deletetask 2 4` – deletes the tasks with absolute task indices `2` and `4` in a single command, even if those tasks are not currently visible in a filtered employee list.
+
+After a successful `deletetask` command, ManageUp confirms the deleted task details in the result box.
+
+<box type="info" seamless>
+
+**Expected output:**
 ![Delete task success](images/DeleteTask.png)
 
-* `deletetask 2 4` deletes the tasks with task indices `2` and `4`.
+</box>
 
+After a successful batch `deletetask` command, ManageUp lists all deleted task details in the result box.
+
+<box type="info" seamless>
+
+**Expected output for batch deletion:**
 ![Batch delete task success](images/BatchDeleteTask.png)
 
-* `deletetask 0` is not valid because task indices must start from `1`.
+</box>
 
 <a id="clearing-all-tasks-for-an-employee"></a>
 ### Clearing all tasks for an employee : `cleartasks`
 
-Clears every task assigned to one employee.
+Deletes all tasks belonging to one employee identified by employee index or employee name.
 
-Format: `cleartasks INDEX` or `cleartasks n/EMPLOYEE_NAME`
+Format:
+```text
+cleartasks INDEX
+cleartasks n/NAME
+```
 
 * `INDEX` refers to the employee index shown in the currently displayed employee list.
-* `n/EMPLOYEE_NAME` clears tasks for the uniquely matching employee name in the currently displayed employee list.
-* `cleartasks` removes all tasks from both the employee's personal task list and the overall task list used internally by ManageUp.
-* If the employee index is invalid, no tasks will be cleared.
-* If the provided employee name does not match any displayed employee, the command will fail.
-* If more than one displayed employee has the same name, the command will fail and you should use `cleartasks INDEX` instead.
+* `n/NAME` refers to one uniquely matching employee in the currently displayed employee list.
+* Exactly one target employee must be identified.
 
-Examples:
-* `cleartasks 1` clears all tasks assigned to the 1st displayed employee.
-* `cleartasks n/John Doe` clears all tasks assigned to employee `John Doe`.
+<box type="info" seamless>
 
+**Parameter constraints for this command:**
+
+| Parameter | Constraints |
+|-----------|-------------|
+| `INDEX` | Positive integer from the **currently displayed** employee list |
+| `NAME` | Must match exactly one employee in the **currently displayed** list |
+
+</box>
+
+<box type="warning" seamless>
+
+**Warning:** If more than one displayed employee has the same name, `cleartasks n/NAME` will fail. In that case, use `cleartasks INDEX` instead.
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** `cleartasks` uses the index from the **currently displayed list**. If you have filtered the list with `show`, use the indexes shown in the filtered list.
+
+</box>
+
+#### Examples
+
+* `cleartasks 1` – deletes all tasks assigned to the 1st displayed employee.
+* `cleartasks n/John Doe` – deletes all tasks assigned to employee `John Doe`.
+
+After a successful `cleartasks` command, ManageUp confirms all deleted task details for that employee.
+
+<box type="info" seamless>
+
+**Expected output:**
 ![Clear tasks success](images/ClearTask.png)
 
-* `cleartasks 0` is not valid because employee indices must start from `1`.
+</box>
 
 <a id="clearing-all-entries"></a>
 ### Clearing all entries : `clear`
@@ -832,8 +912,8 @@ _More features coming soon ..._
 | Show filtered employees from contacts | **Show**        | `show [n/NAME] [d/DEPARTMENT] [p/PHONE] [e/EMAIL] [pos/POSITION] [t/TAG] [task/TASK]...` <br> e.g., `show n/Ja d/Finance pos/Developer HR Management t/Nightshift` |
 | Delete ALL employees from contacts    | **Clear**       | `clear`                                                                                                                                                            |
 | Add tasks to an employee              | **Add Task**    | `addtask EMPLOYEE_INDEX task/TASK_NAME desc/TASK_DESCRIPTION`<br> e.g., `addtask 1 task/Prepare Slides desc/Send by Friday`                                        |
-| Edit a task                           | **Edit Task**   | `edittask TASK_INDEX [task/TASK_NAME] [desc/TASK_DESCRIPTION]`<br> e.g., `edittask 6 task/Close deal desc/Finalise by Wednesday`                                    |
-| Delete a task                         | **Delete Task** | `deletetask TASK_INDEX`<br> e.g., `deletetask 1`                                                                                                                   |
+| Edit a task                           | **Edit Task**   | `edittask TASK_INDEX [task/TASK_NAME] [desc/TASK_DESCRIPTION]`<br> e.g., `edittask 6 task/Close deal desc/Finalise by Wednesday`                                   |
+| Delete a task                         | **Delete Task** | `deletetask TASK_INDEX [MORE_TASK_INDEXES]...`<br> e.g., `deletetask 1`, `deletetask 1 3`                                                                          |
 | Clear all tasks for one employee      | **Clear Tasks** | `cleartasks INDEX` or `cleartasks n/EMPLOYEE_NAME`<br> e.g., `cleartasks 1`, `cleartasks n/James Ho`                                                               |
 | Display help message                  | **Help**        | `help`                                                                                                                                                             |
 
@@ -926,12 +1006,12 @@ Use this section when `delete` fails.
 
 Use this section when `addtask` fails.
 
-| Scenario | Message shown | How to fix |
-|----------|---------------|------------|
-| Missing fields or wrong syntax | `Invalid task command format. Please use the following format: ...` | Use the format: `addtask EMPLOYEE_INDEX task/TASK_NAME desc/TASK_DESCRIPTION` |
-| Task name is blank or too long | `Task name should not be empty and should be between 1 and 40 characters.` | Re-enter a task name between 1 and 40 characters long |
-| Task description is blank or too long | `Task description should not be empty and should be between 1 and 120 characters.` | Re-enter a task description between 1 and 120 characters long |
-| Employee index is out of range | `Invalid employee index. Please enter an index shown in the current employee list.` | Run `list` and use a valid employee index |
+| Scenario                                                             | Message shown | How to fix |
+|----------------------------------------------------------------------|---------------|------------|
+| Missing fields, duplicate fields or wrong syntax                     | `Invalid task command format. Please use the following format: ...` | Use the format: `addtask EMPLOYEE_INDEX task/TASK_NAME desc/TASK_DESCRIPTION` |
+| Task name is blank or too long                                       | `Task name should not be empty and should be between 1 and 40 characters.` | Re-enter a task name between 1 and 40 characters long |
+| Task description is blank or too long                                | `Task description should not be empty and should be between 1 and 120 characters.` | Re-enter a task description between 1 and 120 characters long |
+| Employee index is out of range                                       | `Invalid employee index. Please enter an index shown in the current employee list.` | Run `list` and use a valid employee index |
 | Task with same name and description already exists for this employee | `This employee already has a task with the same name and same description.` | Change the task name or description |
 
 <div style="height: 20px;"></div>
