@@ -481,4 +481,8 @@ public class ShowCommandParserTest {
         assertParseFailure(parser, "n/ d/Finance", EMPTY_NAME_FIELD_MESSAGE);
     }
 
+    @Test
+    public void parse_invalidPhoneWithOtherValidPrefixes_failure() {
+        assertParseFailure(parser, "n/Alice d/IT p/9fv", Phone.MESSAGE_CONSTRAINTS);
+    }
 }
